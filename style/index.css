@@ -14,8 +14,12 @@ body {
    background-attachment: fixed;
    scroll-behavior: smooth;
    text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+   
 }
 
+html {
+    scroll-behavior: smooth;
+}
 /* ----------------- ANIMAÇÕES ----------------- */
 .fade-in-scroll {
     animation: fadeIn 1.2s ease-out forwards;
@@ -64,6 +68,13 @@ section:target {
   padding: 10px 20px;
 }
 
+/* efeito quando rolar */
+.menu.scrolled .menu-content {
+    background-color: rgb(0, 0, 0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
 /* ----------------- LOGO ----------------- */
 .menu img {
   height: 40px;
@@ -89,13 +100,6 @@ section:target {
   font-size: 20px;
 }
 
-/* efeito quando rolar */
-.menu.scrolled .menu-content {
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-    transition: background-color 0.5s ease, box-shadow 0.5s ease;
-}
-
 /* ----------------- BOTÃO LOGIN ----------------- */
 .button_login {
     background-color: #2a2a2a;
@@ -118,6 +122,11 @@ section:target {
     border-color: #bbbbbb;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
     transform: scale(1.05);
+}
+
+a {
+    text-decoration: none;
+    color: #f0f0f0;
 }
 
 #home {
@@ -193,6 +202,7 @@ section:target {
 .sobre img {
     height: 40px;
     width: 40px;
+    padding-right: 10px;
 }
 
 .titulo-sobre {
@@ -202,7 +212,13 @@ section:target {
     margin-bottom: 0;
     color: #b20000;
 }
-    
+ 
+.titulo {
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+}
+
 .container-sobre {
     display: flex;
     justify-content: center;
@@ -238,7 +254,7 @@ section:target {
     text-align: justify;
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .coluna-sobre {
@@ -246,6 +262,7 @@ section:target {
     font-size: 15px;
     color: #000000;
     padding-left: 20px;
+    padding-right: 10px;
     margin-top: 0;
     align-items: end;
 }
