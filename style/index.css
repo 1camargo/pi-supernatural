@@ -190,14 +190,19 @@ section:target {
     text-align: justify;
 }
 
-
-.titulo-sobre {
-    font-size: 40px;
-    font-family: 'Special Elite', cursive;
-    margin-bottom: 50px;
-    color: #b20000;
+.sobre img {
+    height: 40px;
+    width: 40px;
 }
 
+.titulo-sobre {
+    font-size: 35px;
+    font-family: 'Special Elite', cursive;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #b20000;
+}
+    
 .container-sobre {
     display: flex;
     justify-content: center;
@@ -211,7 +216,7 @@ section:target {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 30px;
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
-    padding: 40px;
+    padding: 10px;
 }
 
 .coluna-sobre {
@@ -223,34 +228,34 @@ section:target {
 .coluna-sobre h3 {
     color: #b20000;
     font-size: 30px;
-    margin-bottom: 5px;
+    margin: 0;
 }
 
 .coluna-sobre p {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 20px;
     line-height: 2;
     text-align: justify;
     font-family: 'Poppins', sans-serif;
-
-
+    margin: 0;
+    margin-bottom: 10px;
 }
 
 .coluna-sobre {
     font-style: italic;
     font-size: 15px;
     color: #000000;
-    padding-left: 15px;
-    margin-top: 20px;
+    padding-left: 20px;
+    margin-top: 0;
     align-items: end;
 }
 
 #quadrado2 {
     background-color: rgba(255, 255, 255, 0.815);
-    padding: 20px; 
+    padding: 10px; 
     max-width: 1200px;
     width: 100%;
     text-align: center;
-    margin: 0 auto; 
+    margin: 0; 
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.45), rgb(240, 248, 255));
 }
