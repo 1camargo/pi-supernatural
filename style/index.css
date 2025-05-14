@@ -7,7 +7,7 @@ body {
 	font-family: "Special Elite", cursive;
 	font-size: 16px;
 	line-height: 1.6;
-	background-image: url("../image/backgroundHome.jpg");
+	background-image: url("../image/backgrounds/backgroundHome.jpg");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat; /* corrigido! */
@@ -58,12 +58,7 @@ section:target {
 .menu-content {
 	max-width: 1100px;
 	width: 100%;
-	background-color: rgba(
-		0,
-		0,
-		0,
-		0.8
-	); /* fundo escuro somente atrás dos itens */
+	background-color: rgba(0, 0, 0, 0.8); /* fundo escuro somente atrás dos itens */
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -184,7 +179,7 @@ a {
 
 .sobre {
 	padding: 0;
-	background-image: url("../image/backgroundSobre.jpg");
+	background-image: url("../image/backgrounds/backgroundSobre.jpg");
 	background-repeat: no-repeat;
 	background-size: auto;
 	background-position: center;
