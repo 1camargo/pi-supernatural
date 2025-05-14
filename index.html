@@ -5,20 +5,16 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<!--Google Fonts-->
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
-	<!--Fonte Special Elite-->
 	<link rel="shortcut icon" href="image/icons/favicon.ico" type="image/x-icon" />
-	<!--Fav Icon - Devil's Trap-->
 	<link rel="icon" href="image/icons/favicon.ico" type="image/x-icon" />
-	<!--Fav Icon - Devil's Trap-->
 	<link rel="stylesheet" href="style/index.css" />
 	<title>Portal dos Caçadores 💀</title>
 </head>
 
 <body>
-	<nav class="menu">
+	<nav class="navbar">
 		<img src="image/icons/logo.png" alt="Logo" />
 		<ul>
 			<li><a href="#home" style="color: #b22222">Home</a></li>
@@ -300,11 +296,11 @@
 
 <script>
 	window.addEventListener('scroll', function () {
-		const menu = document.querySelector('.menu');
+		const navbar = document.querySelector('.navbar');
 		if (window.scrollY > 50) {
-			menu.classList.add('scrolled');
+			navbar.classList.add('scrolled');
 		} else {
-			menu.classList.remove('scrolled');
+			navbar.classList.remove('scrolled');
 		}
 	});
 </script>
