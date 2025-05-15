@@ -38,6 +38,7 @@ section:target {
 	opacity: 1;
 	transform: translateY(0);
 	transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+	scroll-margin-top: 100px;
 }
 
 .navbar {
@@ -67,6 +68,7 @@ section:target {
 	background-color: rgb(0, 0, 0);
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 	transition: background-color 0.5s ease, box-shadow 0.5s ease;
+	transition: all 0.4s ease-in-out;
 }
 
 .navbar img {
@@ -90,6 +92,12 @@ section:target {
 	text-decoration: none;
 	font-family: "Special Elite", cursive;
 	font-size: 20px;
+	transition: color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+	color: #b20000;
+	text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
 }
 
 .button_login {
@@ -139,7 +147,7 @@ a {
 }
 
 .conteudo-home p {
-	font-size: 6vh;
+	font-size: 4vh;
 }
 
 .button_conheça {
@@ -165,8 +173,10 @@ a {
 	transform: scale(1.05);
 }
 
-.button_começar:active {
-	background-color: black;
+.button_login:focus,
+.button_conheça:focus {
+	outline: 2px dashed #b20000;
+	outline-offset: 4px;
 }
 
 .sobre {
@@ -203,8 +213,10 @@ a {
 
 .container-sobre {
 	display: flex;
-	justify-content: center;
+	flex: 1;
+	justify-content: pace-evenly;
 	align-items: flex-start;
+	text-align: left;
 	gap: 20px;
 	flex-wrap: wrap;
 	max-width: 1200px;
@@ -216,13 +228,8 @@ a {
 	padding: 10px;
 }
 
-.coluna-sobre {
-	flex: 1;
-	justify-content: space-evenly;
-	text-align: left;
-}
-
 .coluna-sobre h3 {
+	padding-top: 20px;
 	color: #b20000;
 	font-size: 30px;
 	margin: 0;
@@ -246,6 +253,9 @@ a {
 	padding-right: 10px;
 	margin-top: 0;
 	align-items: end;
+	flex: 1;
+	justify-content: space-evenly;
+	text-align: left;
 }
 
 #quadrado2 {
@@ -255,11 +265,7 @@ a {
 	width: 100%;
 	text-align: center;
 	margin: 0;
-	background: linear-gradient(
-		135deg,
-		rgba(255, 255, 255, 0.45),
-		rgb(240, 248, 255)
-	);
+	background: linear-gradient(135deg,rgba(255, 255, 255, 0.45),rgb(240, 248, 255));
 	border-radius: 20px;
 }
 
@@ -268,11 +274,12 @@ a {
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	min-height: 100vh;
 	padding: 60px 40px;
 	color: white;
 	text-align: center;
-	position: relative;
+	min-height: auto; 
+  padding-bottom: 80px; 
+  position: relative;
 }
 
 .conteudo-personagens h2 {
@@ -285,7 +292,7 @@ a {
 .cards-container {
 	display: flex;
 	justify-content: center;
-	gap: 100px;
+	gap: 40px;
 	padding: 60px 20px;
 	flex-wrap: wrap;
 	font-family: "Special Elite", cursive;
@@ -406,4 +413,84 @@ a {
 .texto {
 	font-size: 20px;
 	margin: 30px;
+}
+
+.curiosidades {
+	padding: 0;
+	background-image: url("../image/backgrounds/backgroundCuriosidades.jpg");
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: justify;
+	margin-top: 1600px;
+}
+
+.curiosidades img {
+	height: 40px;
+	width: 40px;
+	padding-right: 10px;
+}
+
+.titulo-curiosidades {
+	font-size: 35px;
+	font-family: "Special Elite", cursive;
+	margin-top: 0;
+	margin-bottom: 0;
+	color: #b20000;
+}
+
+.titulo {
+	flex-direction: row;
+	display: flex;
+	justify-content: center;
+}
+
+.container-curiosidades {
+	display: flex;
+	flex: 1;
+	justify-content: space-evenly;
+	align-items: flex-start;
+	text-align: left;
+	gap: 20px;
+	flex-wrap: wrap;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 50px 20px;
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: 50px;
+	box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+	padding: 10px;
+}
+
+.coluna-curiosidades h3 {
+	padding-top: 20px;
+	color: #b20000;
+	font-size: 30px;
+	margin: 0;
+}
+
+.coluna-curiosidades p {
+	font-size: 20px;
+	margin-bottom: 20px;
+	line-height: 2;
+	text-align: justify;
+	font-family: "Poppins", sans-serif;
+	margin: 0;
+	margin-bottom: 15px;
+}
+
+.coluna-curiosidades {
+	font-style: italic;
+	font-size: 15px;
+	color: #000000;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 0;
+	align-items: end;
+	flex: 1;
+	justify-content: space-evenly;
+	text-align: left;
 }
