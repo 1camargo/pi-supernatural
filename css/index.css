@@ -189,6 +189,7 @@ a {
 	flex-direction: column;
 	align-items: center;
 	text-align: justify;
+	margin-bottom: 100px;
 }
 
 .sobre img {
@@ -267,6 +268,7 @@ a {
 	margin: 0;
 	background: linear-gradient(135deg,rgba(255, 255, 255, 0.45),rgb(240, 248, 255));
 	border-radius: 20px;
+	margin-bottom: 40px;
 }
 
 .conteudo-personagens {
@@ -277,12 +279,14 @@ a {
 	padding: 60px 40px;
 	color: white;
 	text-align: center;
+	margin-top: 100px;
 	min-height: auto; 
-  padding-bottom: 80px; 
-  position: relative;
+  	padding-bottom: 80px; 
+  	position: relative;
 }
 
 .conteudo-personagens h2 {
+	padding-top: 20px;
 	margin-bottom: 10px;
 	font-weight: bold;
 	font-size: 40px;
@@ -493,4 +497,54 @@ a {
 	flex: 1;
 	justify-content: space-evenly;
 	text-align: left;
+}
+
+.spotify-player-fixed-left {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+}
+
+.footer {
+  background-color: transparent;
+  padding: 20px 10px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.footer-conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-texto {
+	color: #ffffff;
+	font-family: "Special Elite", cursive;
+  	font-size: 20px;
+	margin: 0;
+  	line-height: 1.5;
+}
+
+.social-footer {
+  display: flex;
+  gap: 20px;
+}
+
+.icon-social {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.icon-social:hover {
+  transform: scale(1.15);
+  filter: brightness(0) invert(0.6);
 }
