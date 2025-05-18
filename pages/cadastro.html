@@ -2,42 +2,74 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
     <link rel="shortcut icon" href="../image/icons/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="../image/icons/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="../css/cadastro.css">
-    <title>Cadastro 💀</title>
+    <link rel="stylesheet" href="../css/cadastro.css" />
+    <title>Cadastre-se 💀</title>
 </head>
 
 <body>
     <div class="container">
-        <div class="form-box">
+        <div class="formulario-box">
             <h1>Junte-se à luta</h1>
             <p>Cadastre-se para receber alertas, missões e notícias do além.</p>
             <form>
                 <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="exemplo@email.com">
+                <input type="email" id="email" placeholder="seuemail@email.com" />
 
                 <label for="username">Nome de caçador</label>
-                <input type="text" id="username" placeholder="hunter_x">
+                <input type="text" id="username" placeholder="Old Hunter" />
 
                 <label for="password">Senha</label>
-                <input type="password" id="password" placeholder="********">
+                <input type="password" id="password" placeholder="********" />
 
                 <label for="confirm">Confirmar senha</label>
-                <input type="password" id="confirm" placeholder="********">
+                <input type="password" id="confirm" placeholder="********" />
 
-                <button type="submit" class="btn">Cadastrar</button>
-            </form>
+                <button type="submit" class="button" onclick="cadastrar()">
+                    Cadastrar
+                </button>
+
+                <div class="conta">
+                    Já tem uma conta? <a href="login.html">Entre agora!</a>
+                </div>
+
+                <div class="button-home">
+                    <a href="index.html">Voltar para a página inicial</a>
+                </div>
         </div>
-        <div class="image-box">
-            <img src="../image/backgrounds/exorcism.jpg" alt="Símbolo de proteção sobrenatural">
-        </div>
+
+        <div class="image-box"></div>
     </div>
 </body>
+<script src="../js/script.js"></script>
 
 </html>
+
+<script>
+    function cadastrar() {
+        var email = document.getElementById("email").value;
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var confirm = document.getElementById("confirm").value;
+
+        if (email == "" || password == "" || confirm == "") {
+            alert("Preencha os campos!");
+        } else if (!email.includes("@") || !email.includes(".") || email.includes(" ")) {
+            alert("O e-mail informado é inválido!\nVerifique o e-mail e tente novamente.");
+        } else if (password.length < 8) {
+            alert("A senha deve ter no mínimo 8 caracteres.");
+        } else if (!password.includes("!") && !password.includes("@") && !password.includes("#") && !password.includes("$") && !password.includes("%") && !password.includes("&") && !password.includes("*") && !password.includes("(") && !password.includes(")")) {
+            alert("A senha deve conter pelo menos um caractere especial.");
+        } else if (password !== confirm) {
+            alert("As senhas não coincidem.");
+        } else {
+            alert("Cadastro realizado com sucesso!");
+        }
+    }
+</script>
