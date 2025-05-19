@@ -29,9 +29,9 @@
             <input type="password" id="iptPassword" placeholder="********" />
 
             <label for="confirmar">confirmarar senha</label>
-            <input type="password" id="iptconfirmarar" placeholder="********" />
+            <input type="password" id="iptConfirmar" placeholder="********" />
 
-            <button type="submit" class="button" onclick="cadastrar()">
+            <button type="button" class="button" onclick="cadastrar()">
                 Cadastrar
             </button>
 
@@ -59,7 +59,7 @@
         var confirmar = document.getElementById("iptConfirmar").value;
 
         if (email == "" || username == "" || password == "" || confirmar == "") {
-            alert("Preencha os campos!");
+            alert("Preencha todos os campos!");
         } else if (username == "") {
             alert("O nome de caçador é obrigatório.");
         } else if (!email.includes("@") || !email.includes(".") || email.includes(" ")) {
@@ -71,7 +71,8 @@
         } else if (password !== confirmar) {
             alert("As senhas não coincidem.");
         } else {
-            alert("Cadastro realizado com sucesso!");
+            alert("Cadastro realizado com sucesso! 👻");
+            window.location.href = "login.html";
         }
     }
 </script>

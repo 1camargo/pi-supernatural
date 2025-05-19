@@ -19,12 +19,12 @@
             <p>Entre para continuar sua missão contra o mal.</p>
 
                 <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="seuemail@email.com" required />
+                <input type="email" id="iptEmail" placeholder="seuemail@email.com" required />
 
                 <label for="senha">Senha</label>
-                <input type="password" id="senha" placeholder="********" required />
+                <input type="password" id="iptSenha" placeholder="********" required />
 
-                <button type="submit" class="button" onclick="entrar">Entrar</button>
+                <button type="button" class="button" onclick="entrar()">Entrar</button>
             
             <div class="conta">
                 <p>Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
@@ -35,7 +35,7 @@
             </div>
 
             <div class="frase">
-                <p class="frase-latin">NON TIMERO MALA — I will fear no evil.</p>
+                <p class="frase-latin">NON TIMEBO MALA — I will fear no evil.</p>
             </div>
 
         </div>
@@ -47,3 +47,17 @@
 <script src="../js/script.js"></script>
 
 </html>
+
+<script>
+    function entrar() {
+        var email = document.getElementById("iptEmail").value;
+        var senha = document.getElementById("iptSenha").value;
+
+        if (email == "" || senha == "") {
+            alert("Preencha todos os campos!");
+        } else {
+            alert("Login realizado com sucesso! 👻");
+            window.location.href = "index.html";
+        }
+    }
+</script>
