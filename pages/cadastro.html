@@ -18,30 +18,30 @@
         <div class="formulario-box">
             <h1>Junte-se à luta</h1>
             <p>Cadastre-se para receber alertas, missões e notícias do além.</p>
-            <form>
-                <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="seuemail@email.com" />
 
-                <label for="username">Nome de caçador</label>
-                <input type="text" id="username" placeholder="Old Hunter" />
+            <label for="email">E-mail</label>
+            <input type="email" id="iptEmail" placeholder="seuemail@email.com" />
 
-                <label for="password">Senha</label>
-                <input type="password" id="password" placeholder="********" />
+            <label for="username">Nome de caçador</label>
+            <input type="text" id="iptUsername" placeholder="Old Hunter" />
 
-                <label for="confirm">Confirmar senha</label>
-                <input type="password" id="confirm" placeholder="********" />
+            <label for="password">Senha</label>
+            <input type="password" id="iptPassword" placeholder="********" />
 
-                <button type="submit" class="button" onclick="cadastrar()">
-                    Cadastrar
-                </button>
+            <label for="confirmar">confirmarar senha</label>
+            <input type="password" id="iptconfirmarar" placeholder="********" />
 
-                <div class="conta">
-                    Já tem uma conta? <a href="login.html">Entre agora!</a>
-                </div>
+            <button type="submit" class="button" onclick="cadastrar()">
+                Cadastrar
+            </button>
 
-                <div class="button-home">
-                    <a href="index.html">Voltar para a página inicial</a>
-                </div>
+            <div class="conta">
+                Já tem uma conta? <a href="login.html">Entre agora!</a>
+            </div>
+
+            <div class="button-home">
+                <a href="index.html">Voltar para a página inicial</a>
+            </div>
         </div>
 
         <div class="image-box"></div>
@@ -53,20 +53,22 @@
 
 <script>
     function cadastrar() {
-        var email = document.getElementById("email").value;
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
-        var confirm = document.getElementById("confirm").value;
+        var email = document.getElementById("iptEmail").value;
+        var username = document.getElementById("iptUsername").value;
+        var password = document.getElementById("iptPassword").value;
+        var confirmar = document.getElementById("iptConfirmar").value;
 
-        if (email == "" || password == "" || confirm == "") {
+        if (email == "" || username == "" || password == "" || confirmar == "") {
             alert("Preencha os campos!");
+        } else if (username == "") {
+            alert("O nome de caçador é obrigatório.");
         } else if (!email.includes("@") || !email.includes(".") || email.includes(" ")) {
             alert("O e-mail informado é inválido!\nVerifique o e-mail e tente novamente.");
         } else if (password.length < 8) {
             alert("A senha deve ter no mínimo 8 caracteres.");
         } else if (!password.includes("!") && !password.includes("@") && !password.includes("#") && !password.includes("$") && !password.includes("%") && !password.includes("&") && !password.includes("*") && !password.includes("(") && !password.includes(")")) {
             alert("A senha deve conter pelo menos um caractere especial.");
-        } else if (password !== confirm) {
+        } else if (password !== confirmar) {
             alert("As senhas não coincidem.");
         } else {
             alert("Cadastro realizado com sucesso!");

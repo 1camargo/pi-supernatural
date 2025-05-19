@@ -63,7 +63,6 @@ input {
 	border: none;
 	outline: none;
 	border-radius: 5px;
-	font-family: "Poppins", cursive;
 	background-color: #222;
 	color: #fff;
 }
@@ -81,8 +80,8 @@ input {
 	transition: all 0.3s ease-in-out;
 	text-transform: uppercase;
 	box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
-	width: 100%;
 	margin-top: 10px;
+	margin-left: 40%;
 }
 
 .button:hover {
@@ -100,7 +99,7 @@ input {
 
 .image-box {
 	width: 80%;
-	background-image: url('../image/backgrounds/6ac5b9b7cc750f3738ff85b3aa2cd886.jpg');
+	background-image: url('../image/backgrounds/backgroundLogin.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;

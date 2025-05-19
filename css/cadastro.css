@@ -60,7 +60,6 @@ input {
 	border: none;
 	outline: none;
 	border-radius: 5px;
-	font-family: "Poppins", cursive;
 	background-color: #222;
 	color: #fff;
 }
@@ -95,8 +94,8 @@ input {
 }
 
 .image-box {
-	width: 65%;
-	background-image: url('../image/backgrounds/exorcism.jpg');
+	width: 80%;
+	background-image: url('../image/backgrounds/backgroundCadastro.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
