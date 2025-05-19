@@ -64,7 +64,7 @@
 </html>
 
 <script>
-    function enviarRelato() {
+    function enviar() {
         const nome = document.getElementById("iptNome").value;
         const email = document.getElementById("iptEmail").value;
         const tipo = document.getElementById("selTipo").value;
@@ -73,7 +73,7 @@
         const urgencia = document.getElementById("selUrgencia").value;
 
         if (!nome || !email || !descricao || !local) {
-            alert("Preencha todos os campos obrigatórios!");
+            alert("Preencha todos os campos!");
             return;
         } else {
             alert("Relato enviado com sucesso! Um caçador será designado em breve.");
