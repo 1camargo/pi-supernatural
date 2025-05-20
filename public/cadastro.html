@@ -20,15 +20,15 @@
             <p>Cadastre-se para receber alertas, missões e notícias do além.</p>
 
             <label for="email">E-mail</label>
-            <input type="email" id="iptEmail" placeholder="seuemail@email.com" />
+            <input type="text" id="iptEmail" placeholder="seuemail@email.com" />
 
             <label for="username">Nome de caçador</label>
-            <input type="text" id="iptUsername" placeholder="Old Hunter" />
+            <input type="text" id="iptNome" placeholder="Old Hunter" />
 
             <label for="password">Senha</label>
-            <input type="password" id="iptPassword" placeholder="********" />
+            <input type="password" id="iptSenha" placeholder="********" />
 
-            <label for="confirmar">confirmarar senha</label>
+            <label for="confirmar">Confirmar senha</label>
             <input type="password" id="iptConfirmar" placeholder="********" />
 
             <button type="button" class="button" onclick="cadastrar()">
@@ -53,26 +53,55 @@
 
 <script>
     function cadastrar() {
-        var email = document.getElementById("iptEmail").value;
-        var username = document.getElementById("iptUsername").value;
-        var password = document.getElementById("iptPassword").value;
-        var confirmar = document.getElementById("iptConfirmar").value;
+        var emailVar = iptEmail.value;
+        var nomeVar = iptNome.value;
+        var senhaVar = iptSenha.value;
+        var confirmarSenhaVar = iptConfirmar.value;
 
-        if (email == "" || username == "" || password == "" || confirmar == "") {
+        if (emailVar == "" || nomeVar == "" || senhaVar == "" || confirmarSenhaVar == "") {
             alert("Preencha todos os campos!");
-        } else if (username == "") {
+        } else if (nomeVar == "") {
             alert("O nome de caçador é obrigatório.");
-        } else if (!email.includes("@") || !email.includes(".") || email.includes(" ")) {
+        } else if (!emailVar.includes("@") || !emailVar.includes(".") || emailVar.includes(" ")) {
             alert("O e-mail informado é inválido!\nVerifique o e-mail e tente novamente.");
-        } else if (password.length < 8) {
+        } else if (senhaVar.length < 8) {
             alert("A senha deve ter no mínimo 8 caracteres.");
-        } else if (!password.includes("!") && !password.includes("@") && !password.includes("#") && !password.includes("$") && !password.includes("%") && !password.includes("&") && !password.includes("*") && !password.includes("(") && !password.includes(")")) {
+        } else if (!senhaVar.includes("!") && !senhaVar.includes("@") && !senhaVar.includes("#") && !password.includes("$") && !senhaVar.includes("%") && !senhaVar.includes("&") && !senhaVar.includes("*") && !senhaVar.includes("(") && !senhaVar.includes(")")) {
             alert("A senha deve conter pelo menos um caractere especial.");
-        } else if (password !== confirmar) {
+        } else if (senhaVar !== confirmarSenhaVar) {
             alert("As senhas não coincidem.");
-        } else {
-            alert("Cadastro realizado com sucesso! 👻");
-            window.location.href = "login.html";
         }
+
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                nomeServer: nomeVar,
+                senhaServer: senhaVar
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    alert("Cadastro realizado com sucesso! 👻");
+
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000");
+
+                    limparFormulario();
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
     }
 </script>

@@ -18,12 +18,10 @@ CREATE TABLE empresa (
 );
 
 CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(45),
+    nome VARCHAR(45),
+    senha VARCHAR(45)
 );
 
 CREATE TABLE aviso (
