@@ -1,60 +1,57 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
+CREATE DATABASE supernatural;
 
-/*
-comandos para mysql server
-*/
-
-CREATE DATABASE aquatech;
-
-USE aquatech;
-
-CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj CHAR(14),
-	codigo_ativacao VARCHAR(50)
-);
+USE supernatural;
 
 CREATE TABLE usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-    email VARCHAR(45),
+    email VARCHAR(45) UNIQUE,
     nome VARCHAR(45),
     senha VARCHAR(45)
 );
 
-CREATE TABLE aviso (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+CREATE TABLE atividade_paranormal (
+	idAtividade INT PRIMARY KEY AUTO_INCREMENT,
+    tipo VARCHAR(50),
+    CONSTRAINT chkTipo
+    CHECK (tipo IN ('Aparição', 'Possessão', 'Lobisomem', 'Encontro com anjos', 'Outras coisas bizarras'))
 );
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(300),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+CREATE TABLE urgencia (
+	idUrgencia INT PRIMARY KEY AUTO_INCREMENT,
+    nivel VARCHAR(20),
+    CONSTRAINT chkNivel
+    CHECK (nivel IN ('Baixo', 'Moderado', 'Alto', 'Crítico'))
 );
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
-
-create table medida (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	dht11_umidade DECIMAL,
-	dht11_temperatura DECIMAL,
-	luminosidade DECIMAL,
-	lm35_temperatura DECIMAL,
-	chave TINYINT,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
+CREATE TABLE relato (
+	idRelato INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45),
+    email VARCHAR(45),
+    descricao TEXT,
+    cidade VARCHAR(45),
+    estado CHAR(2),
+    fkUsuario INT,
+    fkAtividade INT NOT NULL,
+    fkUrgencia INT NOT NULL,
+    CONSTRAINT fkUsuarioRelato FOREIGN KEY (fkUsuario)
+    REFERENCES usuario(idUsuario),
+    CONSTRAINT fkAtividadeRelato FOREIGN KEY (fkAtividade)
+    REFERENCES atividade_paranormal(idAtividade),
+    CONSTRAINT fkUrgenciaRelato FOREIGN KEY (fkUrgencia)
+    REFERENCES Urgencia(idUrgencia)
 );
 
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 1', 'ED145B');
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 2', 'A1B2C3');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
-insert into aquario (descricao, fk_empresa) values ('Aquário de Peixe-dourado', 2);
+-- Inserindo os tipos de atividades paranormais
+INSERT INTO atividade_paranormal (tipo) VALUES
+('Aparição'),
+('Possessão'),
+('Lobisomem'),
+('Encontro com anjos'),
+('Outras coisas bizarras');
+
+-- Inserindo os níveis de urgência
+INSERT INTO urgencia (nivel) VALUES
+('Baixo'),
+('Moderado'),
+('Alto'),
+('Crítico');

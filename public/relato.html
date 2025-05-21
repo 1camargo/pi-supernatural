@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Poppins:wght@300;700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" />
     <link rel="shortcut icon" href="./assets/icon/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="./assets/icon/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./css/relato.css" />
@@ -26,25 +26,30 @@
 
             <label for="tipo">Tipo de atividade paranormal</label>
             <select id="selTipo">
-                <option value="Aparição">Aparição</option>
-                <option value="Possessão">Possessão</option>
-                <option value="Lobisomem">Lobisomem</option>
-                <option value="Anjo">Encontro com anjos</option>
-                <option value="Outro">Outra coisa bizarra</option>
+                <option value="0">Selecione...</option>
+                <option value="1">Aparição</option>
+                <option value="2">Possessão</option>
+                <option value="3">Lobisomem</option>
+                <option value="4">Encontro com anjos</option>
+                <option value="5">Outras coisas bizarras</option>
             </select>
 
             <label for="descricao">Descrição do ocorrido</label>
             <textarea id="iptDescricao" rows="5" placeholder="Conte com detalhes o que aconteceu..."></textarea>
 
-            <label for="local">Local do evento (Cidade/Estado)</label>
-            <input type="text" id="iptLocal" placeholder="Varginha/MG" />
+            <label for="cidade">Cidade do ocorrido</label>
+            <input type="text" id="iptCidade" placeholder="Varginha" />
+
+            <label for="estado">Estado do ocorrido</label>
+            <input type="text" id="iptEstado" placeholder="MG" maxlength="2" />
 
             <label for="urgencia">Nível de urgência</label>
             <select id="selUrgencia">
-                <option value="Baixo">Baixo</option>
-                <option value="Moderado">Moderado</option>
-                <option value="Alto">Alto</option>
-                <option value="CRÍTICO">CRÍTICO - CAÇADORES IMEDIATAMENTE!</option>
+                <option value="0">Selecione...</option>
+                <option value="1">Baixo</option>
+                <option value="2">Moderado</option>
+                <option value="3">Alto</option>
+                <option value="4">CRÍTICO - CAÇADORES IMEDIATAMENTE!</option>
             </select>
 
             <button class="button" onclick="enviar()">ENVIAR RELATO</button>
@@ -56,27 +61,69 @@
             <div class="frase">
                 <p class="frase-latin">NON TIMEBO MALA — I will fear no evil.</p>
             </div>
-
         </div>
     </div>
-
 </body>
 
 </html>
 
 <script>
     function enviar() {
-        const nome = document.getElementById("iptNome").value;
-        const email = document.getElementById("iptEmail").value;
-        const tipo = document.getElementById("selTipo").value;
-        const descricao = document.getElementById("iptDescricao").value;
-        const local = document.getElementById("iptLocal").value;
-        const urgencia = document.getElementById("selUrgencia").value;
+        var nomeVar = iptNome.value;
+        var emailVar = iptEmail.value;
+        var tipoVar = selTipo.value;
+        var descricaoVar = iptDescricao.value;
+        var cidadeVar = iptCidade.value;
+        var estadoVar = iptEstado.value;
+        var urgenciaVar = selUrgencia.value;
 
-        if (!nome || !email || !descricao || !local) {
+        if (
+            !nomeVar ||
+            !emailVar ||
+            tipoVar == 0 ||
+            !descricaoVar ||
+            !cidadeVar ||
+            !estadoVar ||
+            urgenciaVar == 0
+        ) {
             alert("Preencha todos os campos!");
-        } else {
-            alert("Relato enviado com sucesso! Um caçador será designado em breve.");
+            return;
         }
-    }
+
+            fetch("/usuarios/relatar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    tipoServer: tipoVar,
+                    descricaoServer: descricaoVar,
+                    cidadeServer: cidadeVar,
+                    estadoServer: estadoVar,
+                    urgenciaServer: urgenciaVar
+                }),
+            })
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+
+                    if (resposta.ok) {
+                        alert(
+                            "Relato enviado com sucesso! Um caçador será designado em breve. 👻"
+                        );
+
+                        setTimeout(() => {
+                            window.location = "index.html";
+                        }, "2000");
+
+                        limparFormulario();
+                    } else {
+                        throw "Houve um erro ao tentar realizar o envio do relato!";
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+        }
 </script>

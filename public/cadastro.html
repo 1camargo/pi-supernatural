@@ -95,9 +95,11 @@
 
                     limparFormulario();
                 } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
-                }
-            })
+                    resposta.text().then(texto => {
+                    alert("Erro ao enviar relato: " + texto);
+                });
+            }
+        })
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
             });
