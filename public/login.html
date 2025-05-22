@@ -2,61 +2,98 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Poppins:wght@300;700&display=swap"
-        rel="stylesheet">
-    <link rel="shortcut icon" href="./assets/icon/favicon.ico" type="image/x-icon" />
-    <link rel="icon" href="./assets/icon/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="./css/login.css" />
-    <title>Login 💀</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Poppins:wght@300;700&display=swap"
+		rel="stylesheet" />
+	<link rel="shortcut icon" href="./assets/icon/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="./assets/icon/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="./css/login.css" />
+	<title>Login</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="formulario-box">
-            <h1>Bem-vindo de volta, caçador</h1>
-            <p>Entre para continuar sua missão contra o mal.</p>
+	<div class="container">
+		<div class="formulario-box">
+			<h1>Bem-vindo de volta, caçador</h1>
+			<p>Entre para continuar sua missão contra o mal.</p>
 
-            <label for="email">E-mail</label>
-            <input type="email" id="iptEmail" placeholder="seuemail@email.com" required />
+			<label for="email">E-mail</label>
+			<input type="email" id="iptEmail" placeholder="seuemail@email.com" required />
 
-            <label for="senha">Senha</label>
-            <input type="password" id="iptSenha" placeholder="********" required />
+			<label for="senha">Senha</label>
+			<input type="password" id="iptSenha" placeholder="********" required />
 
-            <button type="button" class="button" onclick="entrar()">Entrar</button>
+			<button type="button" class="button" onclick="entrar()">Entrar</button>
 
-            <div class="conta">
-                <p>Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
-            </div>
+			<div class="conta">
+				<p>Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+			</div>
 
-            <div class="button-home">
-                <a href="index.html">Voltar para a página inicial</a>
-            </div>
+			<div class="button-home">
+				<a href="index.html">Voltar para a página inicial</a>
+			</div>
 
-            <div class="frase">
-                <p class="frase-latin">NON TIMEBO MALA — I will fear no evil.</p>
-            </div>
+			<div class="frase">
+				<p class="frase-latin">NON TIMEBO MALA — I will fear no evil.</p>
+			</div>
+		</div>
 
-        </div>
-
-        <div class="image-box"></div>
-    </div>
+		<div class="image-box"></div>
+	</div>
 </body>
 <script src="./js/script.js"></script>
 
 </html>
 
 <script>
-    function entrar() {
-        var email = document.getElementById("iptEmail").value;
-        var senha = document.getElementById("iptSenha").value;
+function entrar() {
+    var emailVar = iptEmail.value;
+    var senhaVar = iptSenha.value;
 
-        if (email == "" || senha == "") {
-            alert("Preencha todos os campos!");
-        } else {
-            alert("Login realizado com sucesso! 👻");
-            window.location.href = "index.html";
-        }
+    if (emailVar == "" || senhaVar == "") {
+        alert('Preencha todos os campos!');
     }
+    console.log("FORM LOGIN: ", emailVar);
+    console.log("FORM SENHA: ", senhaVar);
+
+    fetch("/usuarios/autenticar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            emailServer: emailVar,
+            senhaServer: senhaVar
+        })
+    }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!");
+
+        if (resposta.ok) {
+			console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+                sessionStorage.EMAIL_USUARIO = json.email;
+                sessionStorage.NOME_USUARIO = json.nome;
+                sessionStorage.ID_USUARIO = json.idUsuario;
+	
+                alert("Login realizado com sucesso!");
+                window.location = "relato.html";
+                
+            });
+        } else {
+            console.log("Houve um erro ao tentar realizar o login!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    });
+
+}
 </script>

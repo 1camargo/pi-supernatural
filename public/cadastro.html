@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="./assets/icon/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="./assets/icon/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./css/cadastro.css" />
-    <title>Cadastre-se 💀</title>
+    <title>Cadastre-se</title>
 </head>
 
 <body>
@@ -66,7 +66,7 @@
             alert("O e-mail informado é inválido!\nVerifique o e-mail e tente novamente.");
         } else if (senhaVar.length < 8) {
             alert("A senha deve ter no mínimo 8 caracteres.");
-        } else if (!senhaVar.includes("!") && !senhaVar.includes("@") && !senhaVar.includes("#") && !password.includes("$") && !senhaVar.includes("%") && !senhaVar.includes("&") && !senhaVar.includes("*") && !senhaVar.includes("(") && !senhaVar.includes(")")) {
+        } else if (!senhaVar.includes("!") && !senhaVar.includes("@") && !senhaVar.includes("#") && !senhaVar.includes("$") && !senhaVar.includes("%") && !senhaVar.includes("&") && !senhaVar.includes("*") && !senhaVar.includes("(") && !senhaVar.includes(")")) {
             alert("A senha deve conter pelo menos um caractere especial.");
         } else if (senhaVar !== confirmarSenhaVar) {
             alert("As senhas não coincidem.");
@@ -87,7 +87,7 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
-                    alert("Cadastro realizado com sucesso! 👻");
+                    alert("Cadastro realizado com sucesso!");
 
                     setTimeout(() => {
                         window.location = "login.html";

@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="./assets/icon/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="./assets/icon/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./css/relato.css" />
-    <title>Relatar Atividade 💀</title>
+    <title>Relatar Atividade</title>
 </head>
 
 <body>
@@ -87,7 +87,6 @@
             urgenciaVar == 0
         ) {
             alert("Preencha todos os campos!");
-            return;
         }
 
             fetch("/usuarios/relatar", {
@@ -110,7 +109,7 @@
 
                     if (resposta.ok) {
                         alert(
-                            "Relato enviado com sucesso! Um caçador será designado em breve. 👻"
+                            "Relato enviado com sucesso! Um caçador será designado em breve."
                         );
 
                         setTimeout(() => {
