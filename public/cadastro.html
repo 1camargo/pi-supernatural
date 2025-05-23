@@ -20,16 +20,16 @@
             <p>Cadastre-se para receber alertas, missões e notícias do além.</p>
 
             <label for="email">E-mail</label>
-            <input type="text" id="iptEmail" placeholder="seuemail@email.com" />
+            <input type="text" id="iptEmail" placeholder="seuemail@email.com" oninput="verificar()"/>
 
             <label for="username">Nome de caçador</label>
-            <input type="text" id="iptNome" placeholder="Old Hunter" />
+            <input type="text" id="iptNome" placeholder="Old Hunter" oninput="verificar()"/>
 
             <label for="password">Senha</label>
-            <input type="password" id="iptSenha" placeholder="********" />
+            <input type="password" id="iptSenha" placeholder="********" oninput="verificar()"/>
 
             <label for="confirmar">Confirmar senha</label>
-            <input type="password" id="iptConfirmar" placeholder="********" />
+            <input type="password" id="iptConfirmar" placeholder="********"  oninput="verificar()" />
 
             <button type="button" class="button" onclick="cadastrar()">
                 Cadastrar
@@ -52,25 +52,40 @@
 </html>
 
 <script>
-    function cadastrar() {
-        var emailVar = iptEmail.value;
-        var nomeVar = iptNome.value;
-        var senhaVar = iptSenha.value;
-        var confirmarSenhaVar = iptConfirmar.value;
+    vtLetras = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    var emailVar = '';
+    var nomeVar = '';
+    var senhaVar = ''
+    var confirmarSenhaVar = '';
 
-        if (emailVar == "" || nomeVar == "" || senhaVar == "" || confirmarSenhaVar == "") {
-            alert("Preencha todos os campos!");
-        } else if (nomeVar == "") {
+    function verificar() {
+        emailVar = iptEmail.value;
+        nomeVar = iptNome.value;
+        senhaVar = iptSenha.value;
+        confirmarSenhaVar = iptConfirmar.value;
+        
+        if (nomeVar == "") {
             alert("O nome de caçador é obrigatório.");
+            return false;
         } else if (!emailVar.includes("@") || !emailVar.includes(".") || emailVar.includes(" ")) {
             alert("O e-mail informado é inválido!\nVerifique o e-mail e tente novamente.");
+            return false;
         } else if (senhaVar.length < 8) {
             alert("A senha deve ter no mínimo 8 caracteres.");
+            return false;
         } else if (!senhaVar.includes("!") && !senhaVar.includes("@") && !senhaVar.includes("#") && !senhaVar.includes("$") && !senhaVar.includes("%") && !senhaVar.includes("&") && !senhaVar.includes("*") && !senhaVar.includes("(") && !senhaVar.includes(")")) {
             alert("A senha deve conter pelo menos um caractere especial.");
+            return false;
         } else if (senhaVar !== confirmarSenhaVar) {
             alert("As senhas não coincidem.");
+            return false;
         }
+    
+    }
+    function cadastrar() {
+        if (emailVar == "" || nomeVar == "" || senhaVar == "" || confirmarSenhaVar == "") {
+            alert("Preencha todos os campos!");
+            return false;
 
         fetch("/usuarios/cadastrar", {
             method: "POST",
@@ -106,4 +121,5 @@
 
         return false;
     }
+}
 </script>
