@@ -22,14 +22,13 @@ function cadastrar(nome, email, senha) {
     return database.executar(instrucaoSql);
 }
 
-function relatar(nome, email, tipo, descricao, cidade, estado, urgencia, fkUsuario) {
-    const fkUsuarioValor = fkUsuario !== null ? fkUsuario : 'NULL';
+function relatar(nome, email, descricao, cidade, estado, usuario, tipo, urgencia) {
 
-	console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function relatar():", nome, email, tipo, descricao, cidade, estado, urgencia, fkUsuario);
+	console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function relatar():", nome, email, tipo, descricao, cidade, estado, urgencia, usuario);
 
 	const instrucaoSql = `
 	INSERT INTO relato (nome, email, descricao, cidade, estado, fkUsuario, fkAtividade, fkUrgencia)
-	VALUES ('${nome}', '${email}', '${descricao}', '${cidade}', '${estado}', '${fkUsuarioValor}', '${tipo}', '${urgencia}');
+	VALUES ('${nome}', '${email}', '${descricao}', '${cidade}', '${estado}', '${usuario}', '${tipo}', '${urgencia}');
 	`;
 
 	console.log("Executando SQL:", instrucaoSql);

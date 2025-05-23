@@ -76,6 +76,7 @@
         var cidadeVar = iptCidade.value;
         var estadoVar = iptEstado.value;
         var urgenciaVar = selUrgencia.value;
+        var usuarioVar = sessionStorage.ID_USUARIO;
 
         if (
             !nomeVar ||
@@ -101,7 +102,8 @@
                     descricaoServer: descricaoVar,
                     cidadeServer: cidadeVar,
                     estadoServer: estadoVar,
-                    urgenciaServer: urgenciaVar
+                    urgenciaServer: urgenciaVar,
+                    usuarioServer: usuarioVar
                 }),
             })
                 .then(function (resposta) {

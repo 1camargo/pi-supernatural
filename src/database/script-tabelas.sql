@@ -30,7 +30,7 @@ CREATE TABLE relato (
     descricao TEXT,
     cidade VARCHAR(45),
     estado CHAR(2),
-    fkUsuario INT,
+    fkUsuario INT NULL,
     fkAtividade INT NOT NULL,
     fkUrgencia INT NOT NULL,
     CONSTRAINT fkUsuarioRelato FOREIGN KEY (fkUsuario)
@@ -55,3 +55,7 @@ INSERT INTO urgencia (nivel) VALUES
 ('Moderado'),
 ('Alto'),
 ('Crítico');
+
+SELECT * FROM usuario;
+SELECT * FROM atividade_paranormal;
+SELECT * FROM relato;
