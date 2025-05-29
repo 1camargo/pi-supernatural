@@ -18,12 +18,6 @@
             <h1>Relate sua experiência sobrenatural.</h1>
             <p>Não se preocupe. Já vimos de tudo.</p>
 
-            <label for="nome">Seu nome ou nome falso</label>
-            <input type="text" id="iptNome" placeholder="John Doe / CaçadorX" />
-
-            <label for="email">E-mail</label>
-            <input type="email" id="iptEmail" placeholder="exemplo@email.com" />
-
             <label for="tipo">Tipo de atividade paranormal</label>
             <select id="selTipo">
                 <option value="0">Selecione...</option>
@@ -69,8 +63,6 @@
 
 <script>
     function enviar() {
-        var nomeVar = iptNome.value;
-        var emailVar = iptEmail.value;
         var tipoVar = selTipo.value;
         var descricaoVar = iptDescricao.value;
         var cidadeVar = iptCidade.value;
@@ -79,8 +71,6 @@
         var usuarioVar = sessionStorage.getItem("ID_USUARIO");
 
         if (
-            !nomeVar ||
-            !emailVar ||
             tipoVar == 0 ||
             !descricaoVar ||
             !cidadeVar ||
@@ -96,8 +86,6 @@
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    nomeServer: nomeVar,
-                    emailServer: emailVar,
                     tipoServer: tipoVar,
                     descricaoServer: descricaoVar,
                     cidadeServer: cidadeVar,
@@ -111,7 +99,7 @@
 
                     if (resposta.ok) {
                         alert(
-                            "Relato enviado com sucesso! Um caçador será designado em breve."
+                            "Relato enviado com sucesso!"
                         );
 
                         setTimeout(() => {

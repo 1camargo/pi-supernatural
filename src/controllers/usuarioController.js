@@ -74,8 +74,6 @@ function cadastrar(req, res) {
 
 function relatar(req, res) {
 	// Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-	var nome = req.body.nomeServer;
-	var email = req.body.emailServer;
     var descricao = req.body.descricaoServer;
     var cidade = req.body.cidadeServer;
     var estado = req.body.estadoServer;
@@ -84,12 +82,8 @@ function relatar(req, res) {
     var urgencia = req.body.urgenciaServer;
 
 	// Faça as validações dos valores
-    if (!nome || !email || !tipo || !descricao || !cidade || !estado || !urgencia) {
+    if (!tipo || !descricao || !cidade || !estado || !urgencia) {
 		return res.status(400).send("Todos os campos devem ser preenchidos.");
-	} else if (nome == undefined) {
-		res.status(400).send("Seu nome está indefinido!");
-	} else if (email == undefined) {
-		res.status(400).send("Seu email está indefinido!");
 	} else if (tipo == undefined) {
 		res.status(400).send("O tipo está indefinido!");
     } else if (descricao == undefined) {
@@ -103,7 +97,7 @@ function relatar(req, res) {
     }
 		// Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
 		usuarioModel
-			.relatar(nome, email, descricao, cidade, estado, usuario, tipo, urgencia)
+			.relatar(descricao, cidade, estado, usuario, tipo, urgencia)
 			.then(function (resultado) {
 				res.json(resultado);
 			})

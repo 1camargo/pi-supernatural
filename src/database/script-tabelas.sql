@@ -1,36 +1,36 @@
-CREATE DATABASE supernatural;
+CREATE DATABASE IF NOT EXISTS supernatural;
 
 USE supernatural;
 
-CREATE TABLE usuario (
+CREATE TABLE IF NOT EXISTS usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(45) UNIQUE,
     nome VARCHAR(45),
-    senha VARCHAR(45)
+    senha VARCHAR(260)
 );
 
-CREATE TABLE atividade_paranormal (
+ALTER TABLE usuario MODIFY COLUMN senha VARCHAR(260);
+
+CREATE TABLE IF NOT EXISTS atividade_paranormal (
 	idAtividade INT PRIMARY KEY AUTO_INCREMENT,
-    tipo VARCHAR(50),
+    tipo VARCHAR(50) NOT NULL,
     CONSTRAINT chkTipo
     CHECK (tipo IN ('Aparição', 'Possessão', 'Lobisomem', 'Encontro com anjos', 'Outras coisas bizarras'))
 );
 
-CREATE TABLE urgencia (
+CREATE TABLE IF NOT EXISTS urgencia (
 	idUrgencia INT PRIMARY KEY AUTO_INCREMENT,
-    nivel VARCHAR(20),
+    nivel VARCHAR(20) NOT NULL,
     CONSTRAINT chkNivel
     CHECK (nivel IN ('Baixo', 'Moderado', 'Alto', 'Crítico'))
 );
 
-CREATE TABLE relato (
+CREATE TABLE IF NOT EXISTS relato (
 	idRelato INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(45),
-    email VARCHAR(45),
-    descricao TEXT,
-    cidade VARCHAR(45),
-    estado CHAR(2),
-    fkUsuario INT NULL,
+    descricao TEXT NOT NULL,
+    cidade VARCHAR(45) NOT NULL,
+    estado CHAR(2) NOT NULL,
+    fkUsuario INT NOT NULL,
     fkAtividade INT NOT NULL,
     fkUrgencia INT NOT NULL,
     CONSTRAINT fkUsuarioRelato FOREIGN KEY (fkUsuario)
@@ -38,7 +38,7 @@ CREATE TABLE relato (
     CONSTRAINT fkAtividadeRelato FOREIGN KEY (fkAtividade)
     REFERENCES atividade_paranormal(idAtividade),
     CONSTRAINT fkUrgenciaRelato FOREIGN KEY (fkUrgencia)
-    REFERENCES Urgencia(idUrgencia)
+    REFERENCES urgencia(idUrgencia)
 );
 
 -- Inserindo os tipos de atividades paranormais
@@ -56,6 +56,10 @@ INSERT INTO urgencia (nivel) VALUES
 ('Alto'),
 ('Crítico');
 
+INSERT INTO usuario (email, nome, senha) VALUES
+	('admin@email.com', 'admin', SHA2('1234' ,256));
+
 SELECT * FROM usuario;
 SELECT * FROM atividade_paranormal;
+SELECT * FROM urgencia;
 SELECT * FROM relato;
