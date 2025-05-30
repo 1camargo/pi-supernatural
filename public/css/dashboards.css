@@ -1,0 +1,480 @@
+/* pagina mural */
+
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+.label-captura {
+  display: flex;
+  justify-content: center;
+}
+
+.dash-right .avisos {
+  width: 100%;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dash-right .avisos .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(17, 17, 17, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dash-right .avisos .container .div-form {
+  width: 95%;
+}
+
+.dash-right .avisos .container .div-form #form_postagem {
+  width: 95%;
+}
+
+.dash-right .avisos .div-form label {
+  width: 95%;
+}
+
+.dash-right .avisos .div-form input {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dash-right .avisos .div-form textarea {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  resize: vertical;
+}
+
+.dash-right .avisos .div-form button {
+  background-color: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Special Elite', cursive;
+  transition: all 0.3s ease;
+}
+
+.dash-right .avisos .div-form button:hover {
+  background-color: #b20000;
+  border-color: #ff4444;
+}
+
+.publicacao {
+  background-color: rgba(17, 17, 17, 0.8);
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.publicacao>*:not(:last-child) {
+  padding: 0 0 10px 0;
+}
+
+.div-results {
+  width: 100%;
+}
+
+.div-results .feed-container {
+  background-color: #212124;
+  border-radius: 5px;
+  margin-bottom: 80px;
+}
+
+.div-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.div-buttons>* {
+  margin-left: 30px;
+}
+
+/* pagina graficos */
+
+.dash-header {
+  background-color: #111;
+  border-bottom: 2px solid #b20000;
+  box-shadow: 0 2px 10px rgba(178, 0, 0, 0.3);
+}
+
+.dash {
+  width: 80%;
+  position: relative;
+  top: 0;
+  left: 20%;
+  background-color: #000;
+  height: 100vh;
+  overflow: auto;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.area-parametros-alerta {
+  background-color: rgba(17, 17, 17, 0.8);
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  width: 70%;
+}
+
+.area-parametros-alerta .titulo-legenda {
+  font-family: 'Special Elite', cursive;
+  color: #b20000;
+  margin: 10px 0;
+}
+
+.parametros-alerta {
+  display: flex;
+  width: 100%;
+}
+
+.item-regua {
+  width: 20%;
+  text-align: center;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+
+.item-regua p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.item-regua p:nth-child(2) {
+  font-weight: 800;
+}
+
+.perigo-frio {
+  background-color: #5c6bc0;
+}
+
+.perigo-quente {
+  background-color: #ff7043;
+}
+
+.alerta-frio {
+  background-color: #42a5f5;
+}
+
+.alerta-quente {
+  background-color: #ffee58;
+}
+
+.ideal {
+  background-color: #9ccc65;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card-aquario {
+  background-color: rgba(17, 17, 17, 0.8);
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.card-aquario:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(178, 0, 0, 0.4);
+}
+
+.card-aquario h1 {
+  font-family: 'Special Elite', cursive;
+  color: #b20000;
+  margin-bottom: 15px;
+}
+
+.card-aquario p {
+  margin: 0;
+  font-size: 50px;
+  font-weight: lighter;
+  text-align: left;
+}
+
+.desc-aquario {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.desc-aquario .cor-alerta {
+  width: 30px;
+}
+
+.title-aquario {
+  width: 100%;
+}
+
+.cards h1 {
+  font-size: 22px;
+  border-bottom: solid white 1px;
+  text-align: left;
+  font-weight: lighter;
+  margin: 20px;
+}
+
+.temperatura,
+.umidade {
+  margin: 5px;
+  margin-left: 20px;
+  width: 75%;
+}
+
+.cor-alerta {
+  width: 13%;
+  height: 30%;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.btns-dash {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  padding: 0 30% 0 30%;
+}
+
+.graph {
+  background-color: rgba(17, 17, 17, 0.8);
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.tituloGraficos {
+  font-family: 'Special Elite', cursive;
+  color: #b20000;
+  text-align: center;
+  margin: 20px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.btn-chart {
+  background-color: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Special Elite', cursive;
+  transition: all 0.3s ease;
+}
+
+.btn-chart:hover {
+  background-color: #b20000;
+  border-color: #ff4444;
+}
+
+.btn-pink {
+  background-color: #b20000 !important;
+  color: #fff !important;
+  border-color: #ff4444 !important;
+}
+
+.btn-white {
+  background-color: #2a2a2a !important;
+  color: #fff !important;
+  border-color: #444 !important;
+}
+
+.label-captura {
+  height: 80px;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.display-block {
+  display: block;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* PAGINA DOS GRÁFICOS 2023 */
+
+.janela {
+  display: flex;
+  /* width: 100vw; */
+}
+
+.header-left a {
+  text-decoration: none;
+  color: white;
+}
+
+.header-left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: 100vh;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-right: 2px solid #b20000;
+  background-color: #111;
+  box-shadow: 2px 0 10px rgba(178, 0, 0, 0.3);
+}
+
+.dash-right {
+  display: flex;
+  width: 70%;
+  height: fit-content;
+  background-color: #161618;
+  position: relative;
+  top: 0;
+  left: 25%;
+  height: 100vh;
+  overflow: auto;
+}
+
+.header-left h1 {
+  font-family: 'Special Elite', cursive;
+  color: #b20000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hello {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.hello h3 {
+  color: #f5f5f5;
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+.hello h3 span {
+  font-weight: 800;
+}
+
+.btn-nav {
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+.btn-nav:hover {
+  background-color: #b20000;
+  border-color: #ff4444;
+  transform: scale(1.02);
+}
+
+.btn-nav h3 {
+  font-family: 'Special Elite', cursive;
+  color: #fff;
+  margin: 0;
+}
+
+.btn-nav-white {
+  background-color: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Special Elite', cursive;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: fit-content;
+}
+
+.btn-nav-white:hover {
+  background-color: #b20000;
+  border-color: #ff4444;
+  transform: scale(1.02);
+}
+
+.btn-nav-white h3 {
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  font-family: 'Special Elite', cursive;
+}
+
+.btn-nav h3,
+.btn-logout h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.btn-logout {
+  background-color: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Special Elite', cursive;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-logout:hover {
+  background-color: #b20000;
+  border-color: #ff4444;
+}

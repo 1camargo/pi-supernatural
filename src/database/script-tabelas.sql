@@ -9,8 +9,6 @@ CREATE TABLE IF NOT EXISTS usuario (
     senha VARCHAR(260)
 );
 
-ALTER TABLE usuario MODIFY COLUMN senha VARCHAR(260);
-
 CREATE TABLE IF NOT EXISTS atividade_paranormal (
 	idAtividade INT PRIMARY KEY AUTO_INCREMENT,
     tipo VARCHAR(50) NOT NULL,
@@ -57,7 +55,7 @@ INSERT INTO urgencia (nivel) VALUES
 ('Crítico');
 
 INSERT INTO usuario (email, nome, senha) VALUES
-	('admin@email.com', 'admin', SHA2('1234' ,256));
+	('admin@email.com', 'admin', SHA2('1234', 256));
 
 SELECT * FROM usuario;
 SELECT * FROM atividade_paranormal;

@@ -20,19 +20,19 @@
             <p>Cadastre-se para receber alertas, missões e notícias do além.</p>
 
             <label for="email">E-mail</label>
-            <input type="text" id="iptEmail" placeholder="seuemail@email.com" oninput="verificarEmail()"/>
+            <input type="text" id="iptEmail" placeholder="seuemail@email.com" oninput="verificarEmail()" />
             <div id="txtEmail"></div>
 
             <label for="username">Nome do caçador</label>
-            <input type="text" id="iptNome" placeholder="Old Hunter" oninput="verificarNome()"/>
+            <input type="text" id="iptNome" placeholder="Old Hunter" oninput="verificarNome()" />
             <div id="txtNome"></div>
 
             <label for="password">Senha</label>
-            <input type="password" id="iptSenha" placeholder="********" oninput="verificarSenha()"/>
+            <input type="password" id="iptSenha" placeholder="********" oninput="verificarSenha()" />
             <div id="txtSenha"></div>
 
             <label for="confirmar">Confirmar senha</label>
-            <input type="password" id="iptConfirmar" placeholder="********" oninput="verificarConfirmar()"/>
+            <input type="password" id="iptConfirmar" placeholder="********" oninput="verificarConfirmar()" />
             <div id="txtConfirmar"></div>
 
             <button type="button" class="button" onclick="cadastrar()">
@@ -58,63 +58,81 @@
 <script>
     var vtLetraMaiuscula = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     var vtCaracterEspecial = ['!', '@', '#', '$', '%', '&', '(', ')', '-', '_'];
-    
-    function verificarEmail(emailVar) {
+
+    function verificarEmail() {
+        var emailVar = iptEmail.value;
         if (!emailVar.includes("@") || !emailVar.includes(".") || emailVar.includes(" ")) {
-            txtEmail.innerHTML = `<style="color: red;">E-mail inválido!`
+            txtEmail.innerHTML = `<span style="color: red;">E-mail inválido!</span>`
             return false;
         } else {
-            txtEmail.innerHTML += `<style=color"color: greenyellow;">E-mail válido!`
+            txtEmail.innerHTML = `<span style="color: greenyellow;">E-mail válido!</span>`
             return true;
         }
     }
 
-    function verificarNome(nomeVar) {
+    function verificarNome() {
+        var nomeVar = iptNome.value;
         if (nomeVar == "") {
-            txtNome.innerHTML = `<style="color: red;">O nome é inválido!`
+            txtNome.innerHTML = `<span style="color: red;">O nome é inválido!</span>`
             return false;
         } else {
-            txtNome.innerHTML += `<style="color: greenyellow;">O nome é válido!`
+            txtNome.innerHTML = `<span style="color: greenyellow;">O nome é válido!</span>`
             return true;
         }
     }
 
-    function verificarSenha(senhaVar) {
-        if (!senhaVar.includes(vtCaracterEspecial) || !senhaVar.includes(vtLetraMaiuscula) || senhaVar.length < 8) {
-            txtSenha.innerHTMl = `<style="color: red;">Senha tem que conter 8 caracteres, uma letra maíscula e um caracter especial!`
-            return false;
-        } else {
-            txtSenha.innerHTML += `<style="color: greenyellow;">A senha é válida!`
-            return true;
+    function verificarSenha() {
+        var senhaVar = iptSenha.value;
+        var temLetraMaiuscula = false;
+        var temCaracterEspecial = false;
+
+        for (var i = 0; i < senhaVar.length; i++) {
+            if (vtLetraMaiuscula.includes(senhaVar[i])) {
+                temLetraMaiuscula = true;
+            }
+            if (vtCaracterEspecial.includes(senhaVar[i])) {
+                temCaracterEspecial = true;
+            }
         }
-    }
-    
-    function verificarConfirmar(senhaVar, confirmarSenhaVar) {
-        if (senhaVar !== confirmarSenhaVar) {
-            txtConfirmar.innerHTML = `<style="color: red;">As senhas não conferem!`
+
+        if (!temCaracterEspecial || !temLetraMaiuscula || senhaVar.length < 8) {
+            txtSenha.innerHTML = `<span style="color: red;">Senha tem que conter 8 caracteres, uma letra maiúscula e um caracter especial!</span>`
             return false;
         } else {
-            txtConfirmar.innerHTML += `<style="color: greenyellow;">As senhas conferem!`
+            txtSenha.innerHTML = `<span style="color: greenyellow;">A senha é válida!</span>`
             return true;
         }
     }
 
-    function cadastrar(emailVar, nomeVar, senhaVar, confirmarSenhaVar) {
-        
+    function verificarConfirmar() {
+        if (iptSenha.value != iptConfirmar.value) {
+            txtConfirmar.innerHTML = `<span style="color: red;">As senhas não conferem!</span>`
+            return false;
+        } else {
+            txtConfirmar.innerHTML = `<span style="color: greenyellow;">As senhas conferem!</span>`
+            return true;
+        }
+    }
+
+    function cadastrar() {
+        var emailVar = iptEmail.value;
+        var nomeVar = iptNome.value;
+        var senhaVar = iptSenha.value;
+        var confirmarSenhaVar = iptConfirmar.value;
 
         if (emailVar == "" || nomeVar == "" || senhaVar == "" || confirmarSenhaVar == "") {
             alert("Preencha todos os campos!");
             return false;
-        } else if (verificarEmail(iptEmail.value) == false) {
+        } else if (!verificarEmail()) {
             alert("O e-mail é inválido!\nVerifique novamente.");
             return false;
-        } else if (verificarNome(iptNome.value) == false) {
+        } else if (!verificarNome()) {
             alert("O nome é obrigatório!\nVerifique novamente.");
             return false;
-        } else if (verificarSenha(iptSenha.value) == false) {
+        } else if (!verificarSenha()) {
             alert("A senha é inválida!\nVerifique novamente.");
             return false;
-        } else if (verificarConfirmar(iptSenha.value, iptConfirmar.value) == false) {
+        } else if (!verificarConfirmar()) {
             alert("As senhas não conferem!\nVerifique novamente.");
             return false;
         }
