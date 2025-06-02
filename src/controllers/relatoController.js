@@ -1,7 +1,7 @@
-var avisoModel = require("../models/avisoModel");
+var relatoModel = require("../models/relatoModel");
 
 function listar(req, res) {
-    avisoModel.listar().then(function (resultado) {
+    relatoModel.listar().then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -9,7 +9,7 @@ function listar(req, res) {
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        console.log("Houve um erro ao buscar osdRelatos: ", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
@@ -17,7 +17,7 @@ function listar(req, res) {
 function listarPorUsuario(req, res) {
     var idUsuario = req.params.idUsuario;
 
-    avisoModel.listarPorUsuario(idUsuario)
+    relatoModel.listarPorUsuario(idUsuario)
         .then(
             function (resultado) {
                 if (resultado.length > 0) {
@@ -31,7 +31,7 @@ function listarPorUsuario(req, res) {
             function (erro) {
                 console.log(erro);
                 console.log(
-                    "Houve um erro ao buscar os avisos: ",
+                    "Houve um erro ao buscar osdRelatos: ",
                     erro.sqlMessage
                 );
                 res.status(500).json(erro.sqlMessage);
@@ -42,7 +42,7 @@ function listarPorUsuario(req, res) {
 function pesquisarDescricao(req, res) {
     var descricao = req.params.descricao;
 
-    avisoModel.pesquisarDescricao(descricao)
+    relatoModel.pesquisarDescricao(descricao)
         .then(
             function (resultado) {
                 if (resultado.length > 0) {
@@ -54,7 +54,7 @@ function pesquisarDescricao(req, res) {
         ).catch(
             function (erro) {
                 console.log(erro);
-                console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+                console.log("Houve um erro ao buscar osdRelatos: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
             }
         );
@@ -63,16 +63,28 @@ function pesquisarDescricao(req, res) {
 function publicar(req, res) {
     var titulo = req.body.titulo;
     var descricao = req.body.descricao;
+    var cidade = req.body.cidade;
+    var estado = req.body.estado;
     var idUsuario = req.params.idUsuario;
+    var tipo = req.body.tipo;
+    var urgencia = req.body.urgencia;
 
     if (titulo == undefined) {
         res.status(400).send("O título está indefinido!");
+    } else if (tipo == undefined) {
+        res.status(400).send("O tipo está indefinido!");
     } else if (descricao == undefined) {
         res.status(400).send("A descrição está indefinido!");
+    } else if (cidade == undefined) {
+        res.status(400).send("O estado está indefinido!");
+    } else if (estado == undefined) {
+        res.status(400).send("O estado está indefinido!");
+    } else if (urgencia == undefined) {
+        res.status(400).send("A urgência está indefinida!");
     } else if (idUsuario == undefined) {
         res.status(403).send("O id do usuário está indefinido!");
     } else {
-        avisoModel.publicar(titulo, descricao, idUsuario)
+        relatoModel.publicar(titulo, descricao, cidade, estado, idUsuario, tipo, urgencia)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -90,9 +102,9 @@ function publicar(req, res) {
 
 function editar(req, res) {
     var novaDescricao = req.body.descricao;
-    var idAviso = req.params.idAviso;
+    var idRelato = req.params.idRelato;
 
-    avisoModel.editar(novaDescricao, idAviso)
+    relatoModel.editar(novaDescricao, idRelato)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -109,9 +121,9 @@ function editar(req, res) {
 }
 
 function deletar(req, res) {
-    var idAviso = req.params.idAviso;
+    var idRelato = req.params.idRelato;
 
-    avisoModel.deletar(idAviso)
+    relatoModel.deletar(idRelato)
         .then(
             function (resultado) {
                 res.json(resultado);

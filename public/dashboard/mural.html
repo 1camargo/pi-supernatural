@@ -2,14 +2,14 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/icon/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="../assets/icon/favicon.ico" type="image/x-icon" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Avisos</title>
+    <title>Mural</title>
 
     <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
@@ -26,7 +26,7 @@
 
         <div class="header-left">
 
-            <h1>AquaTech</h1>
+            <h1>Portal dos Caçadores</h1>
 
             <div class="hello">
                 <h3>Olá, <span id="usuario">usuário</span>!</h3>
@@ -45,7 +45,7 @@
             </div>
 
             <div class="btn-nav">
-                <h3>Mural de Avisos</h3>
+                <h3>Mural de Relatos</h3>
             </div>
 
             <div class="btn-logout" onclick="limparSessao()">
@@ -61,29 +61,60 @@
                 <div id="alerta">
                 </div>
                 <div class="container">
-                    <h1>Publicar um aviso</h1>
+                    <h1>Relate sua experiência sobrenatural.</h1>
+                    <p>Não se preocupe. Já vimos de tudo.</p>
                     <div class="div-form">
-                        <form id="form_postagem" method="post" onsubmit="return publicar()">
-                            <label>
-                                Título:
-                                <br>
-                                <input name="titulo" id="titulo" maxlength="100" type="text">
-                            </label>
+                        <form id="formRelato" method="post" onsubmit="return publicar()">
+                            <label for="titulo"> Título</label>
+                            <input id="titulo" maxlength="100" type="text">
                             <br>
                             <br>
-                            <label>
-                                Descrição (máximo de 250 caracteres):
-                                <br>
-                                <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
-                            </label>
+
+                            <label for="tipo">Tipo de atividade paranormal</label>
+                            <select id="tipo">
+                                <option value="0">Selecione...</option>
+                                <option value="1">Aparição</option>
+                                <option value="2">Possessão</option>
+                                <option value="3">Lobisomem</option>
+                                <option value="4">Encontro com anjos</option>
+                                <option value="5">Outras coisas bizarras</option>
+                            </select>
                             <br>
                             <br>
-                            <button>Enviar</button>
+
+                            <label for="descricao">Descrição do ocorrido</label>
+                            <textarea id="descricao" maxlength="2000" rows="7"></textarea>
+                            <br>
+                            <br>
+
+                            <label for="cidade">Cidade do ocorrido</label>
+                            <input type="text" id="cidade">
+                            <br>
+                            <br>
+
+                            <label for="estado">Estado do ocorrido</label>
+                            <input type="text" id="estado" maxlength="2">
+                            <br>
+                            <br>
+
+                            <label for="urgencia">Nível de urgência</label>
+                            <select id="urgencia">
+                                <option value="0">Selecione...</option>
+                                <option value="1">Baixo</option>
+                                <option value="2">Moderado</option>
+                                <option value="3">Alto</option>
+                                <option value="4">CRÍTICO - CAÇADORES IMEDIATAMENTE!</option>
+                            </select>
+                            <br>
+                            <button class="button">ENVIAR RELATO</button>
                         </form>
+                        <br>
+                        <br>
+
                     </div>
-                    <h1>Mural de Avisos</h1>
+                    <h1>Mural de Relatos</h1>
                     <div class="div-results">
-                        <div id="feed_container" class="feed-container">
+                        <div id="feedContainer" class="feed-container">
                         </div>
                     </div>
                 </div>
@@ -99,22 +130,26 @@
 </html>
 
 <script>
-    
+
     usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     function limparFormulario() {
-        document.getElementById("form_postagem").reset();
+        document.getElementById("formRelato").reset();
     }
 
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
 
         var corpo = {
-            titulo: form_postagem.titulo.value,
-            descricao: form_postagem.descricao.value
+            titulo: formRelato.titulo.value,
+            descricao: formRelato.descricao.value,
+            tipo: formRelato.tipo.value,
+            cidade: formRelato.cidade.value,
+            estado: formRelato.estado.value,
+            urgencia: formRelato.urgencia.value
         }
 
-        fetch(`/avisos/publicar/${idUsuario}`, {
+        fetch(`/relatos/publicar/${idUsuario}`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
@@ -125,7 +160,7 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
+                window.alert("Post realizado com sucesso pelo caçador de ID: " + idUsuario + "!");
                 window.location = "/dashboard/mural.html";
                 limparFormulario();
                 finalizarAguardar();
@@ -143,17 +178,17 @@
 
     }
 
-    function editar(idAviso) {
-        sessionStorage.ID_POSTAGEM_EDITANDO = idAviso;
-        console.log("cliquei em editar - " + idAviso);
-        window.alert("Você será redirecionado à página de edição do aviso de id número: " + idAviso);
-        window.location = "/dashboard/edicao-aviso.html"
+    function editar(idRelato) {
+        sessionStorage.ID_POSTAGEM_EDITANDO = idRelato;
+        console.log("cliquei em editar - " + idRelato);
+        window.alert("Você será redirecionado à página de edição do relato de ID: " + idRelato);
+        window.location = "/dashboard/edicao-relato.html"
 
     }
 
-    function deletar(idAviso) {
-        console.log("Criar função de apagar post escolhido - ID" + idAviso);
-        fetch(`/avisos/deletar/${idAviso}`, {
+    function deletar(idRelato) {
+        console.log("Criar função de apagar post escolhido - ID" + idRelato);
+        fetch(`/relatos/deletar/${idRelato}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -161,7 +196,7 @@
         }).then(function (resposta) {
 
             if (resposta.ok) {
-                window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                window.alert("Post deletado com sucesso pelo usuário de e-mail: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
                 window.location = "/dashboard/mural.html"
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
@@ -174,10 +209,10 @@
     }
 
     function atualizarFeed() {
-        fetch("/avisos/listar").then(function (resposta) {
+        fetch("/relatos/listar").then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
-                    var feed = document.getElementById("feed_container");
+                    var feed = document.getElementById("feedContainer");
                     var mensagem = document.createElement("span");
                     mensagem.innerHTML = "Nenhum resultado encontrado."
                     feed.appendChild(mensagem);
@@ -187,7 +222,7 @@
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                    var feed = document.getElementById("feed_container");
+                    var feed = document.getElementById("feedContainer");
                     feed.innerHTML = "";
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
@@ -203,7 +238,7 @@
                         var btnDeletar = document.createElement("button");
 
 
-                        spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
+                        spanID.innerHTML = "ID: <b>" + publicacao.idRelato + "</b>";
                         spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
                         spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
                         divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
@@ -211,7 +246,7 @@
                         btnDeletar.innerHTML = "Deletar";
 
                         divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idAviso;
+                        spanTitulo.id = "inputNumero" + publicacao.idRelato;
                         spanNome.className = "publicacao-nome";
                         spanTitulo.className = "publicacao-titulo";
                         divDescricao.className = "publicacao-descricao";
@@ -219,12 +254,12 @@
                         divButtons.className = "div-buttons"
 
                         btnEditar.className = "publicacao-btn-editar"
-                        btnEditar.id = "btnEditar" + publicacao.idAviso;
-                        btnEditar.setAttribute("onclick", `editar(${publicacao.idAviso})`);
+                        btnEditar.id = "btnEditar" + publicacao.idRelato;
+                        btnEditar.setAttribute("onclick", `editar(${publicacao.idRelato})`);
 
                         btnDeletar.className = "publicacao-btn-editar"
-                        btnDeletar.id = "btnDeletar" + publicacao.idAviso;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
+                        btnDeletar.id = "btnDeletar" + publicacao.idRelato;
+                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idRelato})`);
 
                         divPublicacao.appendChild(spanID);
                         divPublicacao.appendChild(spanNome);
