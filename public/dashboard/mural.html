@@ -1,285 +1,356 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+	<head>
+		<link
+			rel="shortcut icon"
+			href="../assets/icon/favicon.ico"
+			type="image/x-icon"
+		/>
+		<link rel="icon" href="../assets/icon/favicon.ico" type="image/x-icon" />
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Mural</title>
 
-<head>
-    <link rel="shortcut icon" href="../assets/icon/favicon.ico" type="image/x-icon" />
-	<link rel="icon" href="../assets/icon/favicon.ico" type="image/x-icon" />
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mural</title>
+		<link rel="stylesheet" href="./../css/dashboards.css" />
+		<script src="../js/sessao.js"></script>
+		<script src="./../js/alerta.js"></script>
 
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <script src="../js/sessao.js"></script>
-    <script src="./../js/alerta.js"></script>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-</head>
+	<body
+		onload="validarSessao(), atualizarFeed()"
+		style="background-color: #161618"
+	>
+		<div class="janela">
+			<div class="header-left">
+				<h1>Portal dos Caçadores</h1>
 
-<body onload="validarSessao(), atualizarFeed()" style="background-color: #161618;">
+				<div class="hello">
+					<h3>Olá, <span id="usuario">usuário</span>!</h3>
+				</div>
 
-    <div class="janela">
+				<div class="btn-nav-white">
+					<a href="cards.html">
+						<h3>Aquários</h3>
+					</a>
+				</div>
 
+				<div class="btn-nav-white">
+					<a href="./dashboard.html">
+						<h3>Gráficos</h3>
+					</a>
+				</div>
 
-        <div class="header-left">
+				<div class="btn-nav">
+					<h3>Mural de Relatos</h3>
+				</div>
 
-            <h1>Portal dos Caçadores</h1>
+				<div class="btn-logout" onclick="limparSessao()">
+					<h3>Sair</h3>
+				</div>
+			</div>
 
-            <div class="hello">
-                <h3>Olá, <span id="usuario">usuário</span>!</h3>
-            </div>
+			<div class="dash-right">
+				<div class="avisos">
+					<div id="alerta"></div>
+					<div class="container">
+						<h1>Relate sua experiência sobrenatural.</h1>
+						<p>Não se preocupe. Já vimos de tudo.</p>
+						<div class="div-form">
+							<form id="formRelato" method="post" onsubmit="return publicar()">
+								<label for="titulo"> Título</label>
+								<input id="titulo" maxlength="100" type="text" />
+								<br />
+								<br />
 
-            <div class="btn-nav-white">
-                <a href="cards.html">
-                    <h3>Aquários</h3>
-                </a>
-            </div>
+								<label for="tipo">Tipo de atividade paranormal</label>
+								<select id="tipo">
+									<option value="0">Selecione...</option>
+									<option value="1">Aparição</option>
+									<option value="2">Possessão</option>
+									<option value="3">Lobisomem</option>
+									<option value="4">Encontro com anjos</option>
+									<option value="5">Outras coisas bizarras</option>
+								</select>
+								<br />
+								<br />
 
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
-            </div>
+								<label for="descricao">Descrição do ocorrido</label>
+								<textarea id="descricao" maxlength="2000" rows="7"></textarea>
+								<br />
+								<br />
 
-            <div class="btn-nav">
-                <h3>Mural de Relatos</h3>
-            </div>
+								<label for="cidade">Cidade do ocorrido</label>
+								<input type="text" id="cidade" />
+								<br />
+								<br />
 
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
+								<label for="estado">Estado do ocorrido</label>
+								<input type="text" id="estado" maxlength="2" />
+								<br />
+								<br />
 
-        </div>
-
-        <div class="dash-right">
-
-
-            <div class="avisos">
-                <div id="alerta">
-                </div>
-                <div class="container">
-                    <h1>Relate sua experiência sobrenatural.</h1>
-                    <p>Não se preocupe. Já vimos de tudo.</p>
-                    <div class="div-form">
-                        <form id="formRelato" method="post" onsubmit="return publicar()">
-                            <label for="titulo"> Título</label>
-                            <input id="titulo" maxlength="100" type="text">
-                            <br>
-                            <br>
-
-                            <label for="tipo">Tipo de atividade paranormal</label>
-                            <select id="tipo">
-                                <option value="0">Selecione...</option>
-                                <option value="1">Aparição</option>
-                                <option value="2">Possessão</option>
-                                <option value="3">Lobisomem</option>
-                                <option value="4">Encontro com anjos</option>
-                                <option value="5">Outras coisas bizarras</option>
-                            </select>
-                            <br>
-                            <br>
-
-                            <label for="descricao">Descrição do ocorrido</label>
-                            <textarea id="descricao" maxlength="2000" rows="7"></textarea>
-                            <br>
-                            <br>
-
-                            <label for="cidade">Cidade do ocorrido</label>
-                            <input type="text" id="cidade">
-                            <br>
-                            <br>
-
-                            <label for="estado">Estado do ocorrido</label>
-                            <input type="text" id="estado" maxlength="2">
-                            <br>
-                            <br>
-
-                            <label for="urgencia">Nível de urgência</label>
-                            <select id="urgencia">
-                                <option value="0">Selecione...</option>
-                                <option value="1">Baixo</option>
-                                <option value="2">Moderado</option>
-                                <option value="3">Alto</option>
-                                <option value="4">CRÍTICO - CAÇADORES IMEDIATAMENTE!</option>
-                            </select>
-                            <br>
-                            <button class="button">ENVIAR RELATO</button>
-                        </form>
-                        <br>
-                        <br>
-
-                    </div>
-                    <h1>Mural de Relatos</h1>
-                    <div class="div-results">
-                        <div id="feedContainer" class="feed-container">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-</body>
-
+								<label for="urgencia">Nível de urgência</label>
+								<select id="urgencia">
+									<option value="0">Selecione...</option>
+									<option value="1">Baixo</option>
+									<option value="2">Moderado</option>
+									<option value="3">Alto</option>
+									<option value="4">CRÍTICO - CAÇADORES IMEDIATAMENTE!</option>
+								</select>
+								<br />
+								<button class="button">ENVIAR RELATO</button>
+							</form>
+							<br />
+							<br />
+						</div>
+						<h1>Mural de Relatos</h1>
+						<div class="div-results">
+							<div id="feedContainer" class="feed-container"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
 
 <script>
+	usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-    usuario.innerHTML = sessionStorage.NOME_USUARIO;
+	function limparFormulario() {
+		document.getElementById("formRelato").reset();
+	}
 
-    function limparFormulario() {
-        document.getElementById("formRelato").reset();
-    }
+	function publicar() {
+		var idUsuario = sessionStorage.ID_USUARIO;
 
-    function publicar() {
-        var idUsuario = sessionStorage.ID_USUARIO;
+		var corpo = {
+			titulo: formRelato.titulo.value,
+			descricao: formRelato.descricao.value,
+			tipo: formRelato.tipo.value,
+			cidade: formRelato.cidade.value,
+			estado: formRelato.estado.value,
+			urgencia: formRelato.urgencia.value,
+		};
 
-        var corpo = {
-            titulo: formRelato.titulo.value,
-            descricao: formRelato.descricao.value,
-            tipo: formRelato.tipo.value,
-            cidade: formRelato.cidade.value,
-            estado: formRelato.estado.value,
-            urgencia: formRelato.urgencia.value
-        }
+		fetch(`/relatos/publicar/${idUsuario}`, {
+			method: "post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(corpo),
+		})
+			.then(function (resposta) {
+				console.log("resposta: ", resposta);
 
-        fetch(`/relatos/publicar/${idUsuario}`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(corpo)
-        }).then(function (resposta) {
+				if (resposta.ok) {
+					window.alert(
+						"Post realizado com sucesso pelo caçador de ID: " + idUsuario + "!"
+					);
+					window.location = "/dashboard/mural.html";
+					limparFormulario();
+					finalizarAguardar();
+				} else if (resposta.status == 404) {
+					window.alert("Deu 404!");
+				} else {
+					throw (
+						"Houve um erro ao tentar realizar a postagem! Código da resposta: " +
+						resposta.status
+					);
+				}
+			})
+			.catch(function (resposta) {
+				console.log(`#ERRO: ${resposta}`);
+				finalizarAguardar();
+			});
 
-            console.log("resposta: ", resposta);
+		return false;
+	}
 
-            if (resposta.ok) {
-                window.alert("Post realizado com sucesso pelo caçador de ID: " + idUsuario + "!");
-                window.location = "/dashboard/mural.html";
-                limparFormulario();
-                finalizarAguardar();
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
-            } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
-        });
+	function editar(idRelato) {
+		fetch(`/relatos/listar`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then(function (resposta) {
+				if (resposta.ok) {
+					resposta.json().then(function (dados) {
+						const relato = dados.find((r) => r.idRelato == idRelato);
 
-        return false;
+						if (relato && relato.fkUsuario == sessionStorage.ID_USUARIO) {
+							sessionStorage.ID_POSTAGEM_EDITANDO = idRelato;
+							window.alert(
+								"Você será redirecionado à página de edição do relato de ID: " +
+									idRelato
+							);
+							window.location = "/dashboard/edicao-relato.html";
+						} else {
+							window.alert("Você não tem permissão para editar este relato!");
+						}
+					});
+				}
+			})
+			.catch(function (erro) {
+				console.log(erro);
+			});
+	}
 
-    }
+	function deletar(idRelato) {
+		fetch(`/relatos/listar`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then(function (resposta) {
+				if (resposta.ok) {
+					resposta.json().then(function (dados) {
+						 var relato = dados.find(function(relato) {
+                            return relato.idRelato == idRelato;
+                        });
 
-    function editar(idRelato) {
-        sessionStorage.ID_POSTAGEM_EDITANDO = idRelato;
-        console.log("cliquei em editar - " + idRelato);
-        window.alert("Você será redirecionado à página de edição do relato de ID: " + idRelato);
-        window.location = "/dashboard/edicao-relato.html"
+						if (relato && relato.fkUsuario == sessionStorage.ID_USUARIO) {
+							if (confirm("Tem certeza que deseja deletar este relato?")) {
+								fetch(`/relatos/deletar/${idRelato}`, {
+									method: "DELETE",
+									headers: {
+										"Content-Type": "application/json",
+									},
+								})
+									.then(function (resposta) {
+										if (resposta.ok) {
+											window.alert("Relato deletado com sucesso!");
+											window.location = "/dashboard/mural.html";
+										} else {
+											throw "Houve um erro ao tentar deletar o relato!";
+										}
+									})
+									.catch(function (resposta) {
+										console.log(`#ERRO: ${resposta}`);
+									});
+							}
+						} else {
+							window.alert("Você não tem permissão para deletar este relato!");
+						}
+					});
+				}
+			})
+			.catch(function (erro) {
+				console.log(erro);
+			});
+	}
 
-    }
+	function atualizarFeed() {
+		fetch("/relatos/listar")
+			.then(function (resposta) {
+				if (resposta.ok) {
+					if (resposta.status == 204) {
+						var feed = document.getElementById("feedContainer");
+						var mensagem = document.createElement("span");
+						mensagem.innerHTML = "Nenhum resultado encontrado.";
+						feed.appendChild(mensagem);
+						throw "Nenhum resultado encontrado!!";
+					}
 
-    function deletar(idRelato) {
-        console.log("Criar função de apagar post escolhido - ID" + idRelato);
-        fetch(`/relatos/deletar/${idRelato}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(function (resposta) {
+					resposta.json().then(function (resposta) {
+						console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-            if (resposta.ok) {
-                window.alert("Post deletado com sucesso pelo usuário de e-mail: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/mural.html"
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
-            } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
-    }
+						var feed = document.getElementById("feedContainer");
+						feed.innerHTML = "";
+						for (let i = 0; i < resposta.length; i++) {
+							var publicacao = resposta[i];
 
-    function atualizarFeed() {
-        fetch("/relatos/listar").then(function (resposta) {
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    var feed = document.getElementById("feedContainer");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
-                    throw "Nenhum resultado encontrado!!";
-                }
+							var divPublicacao = document.createElement("div");
+							var spanID = document.createElement("span");
+							var spanTitulo = document.createElement("span");
+							var spanTipo = document.createElement("span");
+							var spanNome = document.createElement("span");
+							var spanNivel = document.createElement("span");
+							var spanCidade = document.createElement("span");
+							var spanEstado = document.createElement("span");
+							var divDescricao = document.createElement("div");
+							var divButtons = document.createElement("div");
+							var btnEditar = document.createElement("button");
+							var btnDeletar = document.createElement("button");
 
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+							spanID.innerHTML = "ID: <b>" + publicacao.idRelato + "</b><br>";
+							spanTitulo.innerHTML =
+								"Título: <b>" + publicacao.titulo + "</b><br>";
+							spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b><br>";
+							divDescricao.innerHTML =
+								"Descrição: <b>" + publicacao.descricao + "</b><br>";
+							spanCidade.innerHTML =
+								"Cidade: <b>" + publicacao.cidade + "</b><br>";
+							spanEstado.innerHTML =
+								"Estado: <b>" + publicacao.estado + "</b><br>";
+							spanTipo.innerHTML = "Tipo: <b>" + publicacao.tipo + "</b><br>";
+							spanNivel.innerHTML =
+								"Nível de urgência: <b>" + publicacao.nivel + "</b><br>";
+							btnEditar.innerHTML = "Editar";
+							btnDeletar.innerHTML = "Deletar";
 
-                    var feed = document.getElementById("feedContainer");
-                    feed.innerHTML = "";
-                    for (let i = 0; i < resposta.length; i++) {
-                        var publicacao = resposta[i];
+							divPublicacao.className = "publicacao";
+							spanTitulo.id = "inputNumero" + publicacao.idRelato;
+							spanNome.className = "publicacao-nome";
+							spanTitulo.className = "publicacao-titulo";
+							divDescricao.className = "publicacao-descricao";
 
-                        // criando e manipulando elementos do HTML via JavaScript
-                        var divPublicacao = document.createElement("div");
-                        var spanID = document.createElement("span");
-                        var spanTitulo = document.createElement("span");
-                        var spanNome = document.createElement("span");
-                        var divDescricao = document.createElement("div");
-                        var divButtons = document.createElement("div");
-                        var btnEditar = document.createElement("button");
-                        var btnDeletar = document.createElement("button");
+							divButtons.className = "div-buttons";
 
+							btnEditar.className = "publicacao-btn-editar";
+							btnEditar.id = "btnEditar" + publicacao.idRelato;
 
-                        spanID.innerHTML = "ID: <b>" + publicacao.idRelato + "</b>";
-                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
-                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
-                        btnEditar.innerHTML = "Editar";
-                        btnDeletar.innerHTML = "Deletar";
+							btnDeletar.className = "publicacao-btn-editar";
+							btnDeletar.id = "btnDeletar" + publicacao.idRelato;
 
-                        divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idRelato;
-                        spanNome.className = "publicacao-nome";
-                        spanTitulo.className = "publicacao-titulo";
-                        divDescricao.className = "publicacao-descricao";
+							if (publicacao.fkUsuario == sessionStorage.ID_USUARIO) {
+								btnEditar.setAttribute(
+									"onclick",
+									`editar(${publicacao.idRelato})`
+								);
+								btnDeletar.setAttribute(
+									"onclick",
+									`deletar(${publicacao.idRelato})`
+								);
+								btnEditar.style.display = "block";
+								btnDeletar.style.display = "block";
+							} else {
+								btnEditar.style.display = "none";
+								btnDeletar.style.display = "none";
+							}
 
-                        divButtons.className = "div-buttons"
+							divPublicacao.appendChild(spanID);
+							divPublicacao.appendChild(spanNome);
+							divPublicacao.appendChild(spanTitulo);
+							divPublicacao.appendChild(spanTipo);
+							divPublicacao.appendChild(spanNivel);
+							divPublicacao.appendChild(spanCidade);
+							divPublicacao.appendChild(spanEstado);
+							divPublicacao.appendChild(divDescricao);
+							divPublicacao.appendChild(divButtons);
+							divButtons.appendChild(btnEditar);
+							divButtons.appendChild(btnDeletar);
+							feed.appendChild(divPublicacao);
+						}
 
-                        btnEditar.className = "publicacao-btn-editar"
-                        btnEditar.id = "btnEditar" + publicacao.idRelato;
-                        btnEditar.setAttribute("onclick", `editar(${publicacao.idRelato})`);
-
-                        btnDeletar.className = "publicacao-btn-editar"
-                        btnDeletar.id = "btnDeletar" + publicacao.idRelato;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idRelato})`);
-
-                        divPublicacao.appendChild(spanID);
-                        divPublicacao.appendChild(spanNome);
-                        divPublicacao.appendChild(spanTitulo);
-                        divPublicacao.appendChild(divDescricao);
-                        divPublicacao.appendChild(divButtons);
-                        divButtons.appendChild(btnEditar);
-                        divButtons.appendChild(btnDeletar);
-                        feed.appendChild(divPublicacao);
-                    }
-
-                    finalizarAguardar();
-                });
-            } else {
-                throw ('Houve um erro na API!');
-            }
-        }).catch(function (resposta) {
-            console.error(resposta);
-            finalizarAguardar();
-        });
-    }
-
+						finalizarAguardar();
+					});
+				} else {
+					throw "Houve um erro na API!";
+				}
+			})
+			.catch(function (resposta) {
+				console.error(resposta);
+				finalizarAguardar();
+			});
+	}
 </script>

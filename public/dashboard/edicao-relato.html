@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="../assets/icon/favicon.ico" type="image/x-icon" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal dos Caçadores | Edição de Relato</title>
+
+    <link rel="stylesheet" href="./../css/dashboards.css" />
+    <script src="../js/sessao.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body onload="validarSessao(), listarInfosDeUm()" style="background-color: #161618">
+
+    <div class="janela">
+        <div class="header-left">
+            <h1>Portal dos Caçadores</h1>
+
+            <div class="hello">
+                <h3>Olá, <span id="usuario">usuário</span>!</h3>
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="cards.html">
+                    <h3>Aquários</h3>
+                </a>
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="./dashboard.html">
+                    <h3>Gráficos</h3>
+                </a>
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="./mural.html">
+                    <h3>Mural de Relatos</h3>
+                </a>
+            </div>
+
+            <div class="btn-logout" onclick="limparSessao()">
+                <h3>Sair</h3>
+            </div>
+        </div>
+
+        <div class="dash-right">
+            <div class="avisos">
+                <div class="container">
+                    <h1>Editar um relato</h1>
+                    <div class="div-form">
+                        <label>
+                            Título
+                            <br />
+                            <input id="titulo" maxlength="100" type="text" />
+                        </label>
+                        <br />
+                        <label>
+                            Descrição (máximo de 2000 caracteres)
+                            <br />
+                            <textarea id="descricao" maxlength="2000" rows="7"></textarea>
+                        </label>
+                        <br />
+                        <button onclick="editar()">Editar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function listarInfosDeUm() {
+        console.log("Criar função de trazer informações de post escolhido");
+    }
+
+    function editar() {
+        fetch(`/relatos/editar/${sessionStorage.getItem("ID_POSTAGEM_EDITANDO")}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                titulo: titulo.value,
+                descricao: descricao.value,
+            }),
+        })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    window.alert(
+                        "Relato atualizado com sucesso!"
+                    );
+                    window.location = "/dashboard/mural.html";
+                } else if (resposta.status == 404) {
+                    window.alert("Relato não encontrado!");
+                } else {
+                    throw (
+                        "Houve um erro ao tentar atualizar o relato! Código da resposta: " +
+                        resposta.status
+                    );
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+    }
+</script>
