@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mysql -u aluno -p'Sptech#2024' <<EOF
+mysql -u root -p'SPTech#2024' <<EOF
 
 CREATE DATABASE IF NOT EXISTS supernatural;
 
